@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="bootstrap.min.css">
+<title>Simulator</title>
+</head>
+<body>
+	<DIV class="form-group">
+		<FORM method="get" id="orderForm" name="orderForm" action="" class="form-inline">
+		 <div class="pull-left">
+			<fieldset>
+				<legend>Channel Parameters</legend>
+				<a href="Constant.html"
+					onclick="javascript:void window.open('Constant.html','','width=400,height=400,toolbar=0,menubar=0,location=0,status=1,scrollbars=0,resizable=1,left=0,top=0');return false;">
+				<label for="inputEmail3" class="col-sm-2 control-label">Default Values</label>	
+					 </a><br><label for="inputPathLoss3" class="col-sm-2 control-label">Path Loss:</label>
+					 <input type="text" value=""/><BR>
+					 <label for="inputEmail3" class="col-sm-2 control-label">Shadowing Standard:</label>
+					<input type="text" value=""/>
+			</fieldset>
+			</div>
+			<div class="pull-right">
+			<fieldset>
+				<legend>Radio Parameters</legend>
+				 <label for="inputEmail3" class="col-sm-2 control-label">Modulation:</label>
+					<select class="form-control"><option>NCASK</option>
+					<option>ASK</option>
+					<option>NCFSK</option>
+					<option>FSK</option>
+					<option>BPSK</option>
+					<option>DPSK</option>
+				</select>
+				<label for="inputEmail3" class="col-sm-2 control-label">Encoding:</label>
+				<select class="form-control"><option>NRZ</option>
+					<option>4B5B</option>
+					<option>MANCHESTER</option>
+					<option>SECDED</option></select><BR> <label for="inputEmail3" class="col-sm-2 control-label">Preamble:</label><input type="text"
+					value=""></input><BR><label for="inputEmail3" class="col-sm-2 control-label"> Frame:</label><input type="text"
+					value=""></input>
+			</fieldset>
+			</div>
+			
+			<div class="center-block">
+			<fieldset>
+				<legend>Topology</legend>
+				<label for="inputEmail3" class="col-sm-2 control-label">TYPE:</label><select  class="form-control"><option>GRID</option>
+					<option>UNIFORM</option>
+					<option>RANDOM</option>
+					<option>FILE</option></select><br><label for="inputEmail3" class="col-sm-2 control-label">Grid Unit:</label> <input type="text"
+					value=""></input><br>
+					<label for="inputEmail3" class="col-sm-2 control-label">Number of:</label> <input type="text" value=""></input><br>
+					<label for="inputEmail3" class="col-sm-2 control-label">Terrain:</label><input type="text" value=""></input> by <input type="text"
+					value=""></input><br> <label for="inputEmail3" class="col-sm-2 control-label">Temporal co-orelation:</label><input type="text"
+					value=""></input>&nbsp;&nbsp; <BR><label for="inputEmail3" class="col-sm-2 control-label">Spatial co-orelation:</label><input
+					type="text" value=""></input> <BR>
+			</fieldset>
+			</div>
+			<BR> <input id="submit" type="submit" value="Simulate!"
+				class="btn btn-default" onclick="" />
+		</FORM>
+	</DIV>
+</body>
+</html>

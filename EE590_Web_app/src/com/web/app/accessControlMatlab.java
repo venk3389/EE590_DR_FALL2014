@@ -1,14 +1,25 @@
-package intfcMatlab;
+package com.web.app;
 
 import matlabcontrol.MatlabProxy;
 import matlabcontrol.MatlabProxyFactory;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
+/*
+ * 
+ * 
+ * PLEASE - NAME OF A CLASS STARTS WITH A CAP LETTER
+ * 
+ * */
 
 public class accessControlMatlab {
 	
 	private static MatlabProxy proxy;
 	private static MatlabProxyFactory factory;
+	//dont need to make these variables static : con with static is their memory profile remains even after the code exists.
+	// we need the matlab instance to exists until the server restarts.
+	// also before you create a proxy, check if there is an active proxy object in memory.
+	// if yes use that, else create a new one
+	
 	private static java.lang.String varName;
 	private static java.lang.Object val;
 	private static java.lang.Object result;
@@ -87,6 +98,9 @@ public class accessControlMatlab {
 	}
 	        
     public static java.lang.Object[] returningEvalMat(java.lang.String command,int nargout){
+    	// directly use the function parameters, unless these could be used across other methods
+    	// during execution
+    	//never return from exception, use finally to do so.
 		commandMat = command;
 		nargoutM = nargout; 
 		try {

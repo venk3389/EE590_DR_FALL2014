@@ -1,7 +1,16 @@
-package intfcMatlab;
+package com.web.app;
 
 import java.util.Arrays;
-
+/*
+ * 
+ * 
+ * Remove unused variables, imports. 
+ * Access static methods in a static way i.e. dont refernce a class and access the static method. Just classname.method
+ * Static key word should be used only when you want to persist data even after termination of code. Think on this line, else memory will wasted.
+ * 
+ * 
+ * 
+ * */
 public class MatlabHelper {
 
 	public static java.lang.String varNameM;

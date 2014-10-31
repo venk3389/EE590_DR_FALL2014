@@ -1,4 +1,4 @@
-package intfcMatlab;
+package com.web.app;
 
 import matlabcontrol.MatlabProxy;
 import matlabcontrol.MatlabProxyFactory;
@@ -7,11 +7,11 @@ import matlabcontrol.MatlabInvocationException;
 /*
  * 
  * 
- * PLEASE - NAME OF A CLASS STARTS WITH A CAP LETTER ! Done
+ * PLEASE - NAME OF A CLASS STARTS WITH A CAP LETTER
  * 
  * */
 
-public class AccessControlMatlab {
+public class accessControlMatlab {
 	
 	private static MatlabProxy proxy;
 	private static MatlabProxyFactory factory;
@@ -20,17 +20,17 @@ public class AccessControlMatlab {
 	// also before you create a proxy, check if there is an active proxy object in memory.
 	// if yes use that, else create a new one
 	
-	private  java.lang.String varName;
-	private  java.lang.Object val;
-	private  java.lang.Object result;
-	private  java.lang.Object[] resArr;
-	private  java.lang.String commandMat;
-	private  java.lang.String func;
-	private  int nargoutM;
-	private  int isErr;
-	private  boolean isExistSession;
+	private static java.lang.String varName;
+	private static java.lang.Object val;
+	private static java.lang.Object result;
+	private static java.lang.Object[] resArr;
+	private static java.lang.String commandMat;
+	private static java.lang.String func;
+	private static int nargoutM;
+	private static int isErr;
+	private static boolean isExistSession;
 	
-	public AccessControlMatlab(){
+	public accessControlMatlab(){
 		/*
 		factory = new MatlabProxyFactory();
 		try {
@@ -45,7 +45,7 @@ public class AccessControlMatlab {
 		*/
 	}
 	
-	public void createMatInstance(){
+	public static void createMatInstance(){
 		factory = new MatlabProxyFactory();
 		try {
 			proxy = factory.getProxy();
@@ -58,7 +58,7 @@ public class AccessControlMatlab {
 		}
 	}
 	
-	public void setMatVariable(java.lang.String variableName, java.lang.Object value){
+	public static void setMatVariable(java.lang.String variableName, java.lang.Object value){
 		varName = variableName; 
 		val = value;
 		try {
@@ -71,20 +71,21 @@ public class AccessControlMatlab {
 		}
 	}
 
-	public java.lang.Object getMatVariable(java.lang.String variableName){
+	public static java.lang.Object getMatVariable(java.lang.String variableName){
 		varName = variableName; 
 		try {
-			result = proxy.getVariable(varName);	
+			result = proxy.getVariable(varName);
+			return result;
 		}
 		catch(MatlabInvocationException e) {
 			e.printStackTrace();
 			//Invocation exception
 			isErr = 2;
+			return result;
 		}
-		return result;
 	}
 	
-	public void evalMat(java.lang.String command){
+	public static void evalMat(java.lang.String command){
 		commandMat = command;
 		try {
 			proxy.eval(commandMat);
@@ -96,7 +97,7 @@ public class AccessControlMatlab {
 		}
 	}
 	        
-    public java.lang.Object[] returningEvalMat(java.lang.String command,int nargout){
+    public static java.lang.Object[] returningEvalMat(java.lang.String command,int nargout){
     	// directly use the function parameters, unless these could be used across other methods
     	// during execution
     	//never return from exception, use finally to do so.
@@ -104,17 +105,17 @@ public class AccessControlMatlab {
 		nargoutM = nargout; 
 		try {
 			resArr = proxy.returningEval(commandMat,nargoutM);
-			
+			return resArr;
 			}
 			catch(MatlabInvocationException e) {
 				e.printStackTrace();
 				//Invocation exception
 				isErr = 2;
+				return resArr;
 			}
-		    return resArr;
 	}
 	
-	public void fevalMat(java.lang.String functionName,java.lang.Object... args){
+	public static void fevalMat(java.lang.String functionName,java.lang.Object... args){
 		func = functionName; 
 		try {
 		proxy.feval(func,args);
@@ -126,23 +127,22 @@ public class AccessControlMatlab {
 		}
 	}
 	
-	public java.lang.Object[] returningFevalMat(java.lang.String functionName,int nargout,java.lang.Object... args){
+	public static java.lang.Object[] returningFevalMat(java.lang.String functionName,int nargout,java.lang.Object... args){
 		func = functionName; 
 		nargoutM = nargout; 
 		try {
 			resArr = proxy.returningFeval(func,nargoutM,args);
-		
+			return resArr;
 			}
 			catch(MatlabInvocationException e) {
 				e.printStackTrace();
 				//Invocation exception
 				isErr = 2;
-				
+				return resArr;
 			}
-		    return resArr;
 	}
 	
-	public void exitMat(){
+	public static void exitMat(){
 		try {
 			 proxy.exit();
 		}
@@ -153,20 +153,20 @@ public class AccessControlMatlab {
 		}
 	}
 	
-	public void disconnectMat(){
+	public static void disconnectMat(){
 			 proxy.disconnect();
 	}
 	
-	public void isConnectedMat(){
+	public static void isConnectedMat(){
 		 proxy.isConnected();
 	}
 	
-	public boolean isExistingSessionMat(){
+	public static boolean isExistingSessionMat(){
 		 isExistSession = proxy.isExistingSession();
 		 return isExistSession;
 	}
 	
-	public  void sleepM(int time){
+	public static void sleepM(int time){
 		try{
 			Thread.sleep(time);
 		}

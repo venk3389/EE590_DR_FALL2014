@@ -149,11 +149,13 @@ public class MatlabHelper {
 		int NUMBER_OF_NODES = 25; 
 		double TERRAIN_DIMENSIONS_X = 25.0; 
 		double TERRAIN_DIMENSIONS_Y = 25.0;
-		int TOPOLOGY = 2; 
+		int TOPOLOGY = 3; 
 		double GRID_UNIT = 3.0;
 
 		double TEMPORAL_CORRELATION_COEFFICIENT = 0.5;
 		double SPATIAL_CORRELATION_COEFFICIENT = 0.5;
+		
+		int SIM_CNT = 1;
 		
 		returnArg = matSimObj.returningFevalMat("LinkLayerModel", 4, PATH_LOSS_EXPONENT,SHADOWING_STANDARD_DEVIATION,MODULATION,ENCODING,PREAMBLE_LENGTH,FRAME_LENGTH,NUMBER_OF_NODES,TERRAIN_DIMENSIONS_X,TERRAIN_DIMENSIONS_Y,TOPOLOGY,GRID_UNIT,TEMPORAL_CORRELATION_COEFFICIENT, SPATIAL_CORRELATION_COEFFICIENT);
 		
@@ -179,7 +181,7 @@ public class MatlabHelper {
 		
 		System.out.println("============= Links Stats ===============");
 		int count = 0;
-        for(int simCount = 1; simCount <= 100; simCount++)
+        for(int simCount = 1; simCount <= SIM_CNT; simCount++) // Time step loop
         {
         	System.out.printf("\n At time t%d",simCount);
         	System.out.printf("\n\tPRR \tRSSI \tProb Of Error\n");
@@ -193,6 +195,12 @@ public class MatlabHelper {
             	}
     		}
         }
+        
+        /* Create JSON data */
+        CreateNodeLinkStatsJson nodeLinkStatsJsonObj = new CreateNodeLinkStatsJson(NUMBER_OF_NODES,NUMBER_OF_NODES*NUMBER_OF_NODES,outputArr1,outputArr2,outputArr3,outputArr4);
+        nodeLinkStatsJsonObj.constructJsonData();
+        nodeLinkStatsJsonObj.writeJsonDataFile();
+        nodeLinkStatsJsonObj.printJsonDataObj();
 	}
 	
 	public static void main(String[] args) {

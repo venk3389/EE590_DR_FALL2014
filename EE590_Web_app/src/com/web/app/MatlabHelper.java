@@ -21,7 +21,10 @@ public class MatlabHelper {
 	public double resultM;
 	//public java.lang.Object [] resArrM;
 	public int timeN = 10;
-	
+	/*Mat()
+	 * {
+	 * 
+	 * }*/
 	public void runMatSim1(AccessControlMatlab matSimObj){
 		matSimObj.evalMat("clear");
 		varNameM = "a";
@@ -155,7 +158,8 @@ public class MatlabHelper {
 		double TEMPORAL_CORRELATION_COEFFICIENT = 0.5;
 		double SPATIAL_CORRELATION_COEFFICIENT = 0.5;
 		
-		int SIM_CNT = 1;
+		double PRR_THRES = 0.0;
+		int SIM_CNT = 2;
 		
 		returnArg = matSimObj.returningFevalMat("LinkLayerModel", 4, PATH_LOSS_EXPONENT,SHADOWING_STANDARD_DEVIATION,MODULATION,ENCODING,PREAMBLE_LENGTH,FRAME_LENGTH,NUMBER_OF_NODES,TERRAIN_DIMENSIONS_X,TERRAIN_DIMENSIONS_Y,TOPOLOGY,GRID_UNIT,TEMPORAL_CORRELATION_COEFFICIENT, SPATIAL_CORRELATION_COEFFICIENT);
 		
@@ -197,7 +201,7 @@ public class MatlabHelper {
         }
         
         /* Create JSON data */
-        CreateNodeLinkStatsJson nodeLinkStatsJsonObj = new CreateNodeLinkStatsJson(NUMBER_OF_NODES,NUMBER_OF_NODES*NUMBER_OF_NODES,outputArr1,outputArr2,outputArr3,outputArr4);
+        CreateNodeLinkStatsJson nodeLinkStatsJsonObj = new CreateNodeLinkStatsJson(NUMBER_OF_NODES,NUMBER_OF_NODES*NUMBER_OF_NODES,SIM_CNT,PRR_THRES,outputArr1,outputArr2,outputArr3,outputArr4);
         nodeLinkStatsJsonObj.constructJsonData();
         nodeLinkStatsJsonObj.writeJsonDataFile();
         nodeLinkStatsJsonObj.printJsonDataObj();

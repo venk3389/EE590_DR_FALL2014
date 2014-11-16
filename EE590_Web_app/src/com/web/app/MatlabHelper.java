@@ -213,7 +213,7 @@ public class MatlabHelper {
 		//matObj.runMatSim4(matHandleObj);
 		//matObj.runMatSim5(matHandleObj);
 		matObj.runMatLinkLayerSim(matHandleObj);
-		//matHandleObj.exitMat();
+		matHandleObj.exitMat();
 	}
 
 }

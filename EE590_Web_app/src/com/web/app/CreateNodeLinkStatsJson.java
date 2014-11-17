@@ -36,7 +36,7 @@ public class CreateNodeLinkStatsJson {
     	nodeSize = 3; 	
     }
     
-    public void constructJsonData(){
+    public JSONObject constructJsonData(){
     	
     	int edgeCount = 0;
     	String nodeId; 
@@ -55,7 +55,7 @@ public class CreateNodeLinkStatsJson {
     	double perfectPrr = 1.0;
     	double incPrrLinkStepVal;
     	
-    	for(int simCount = 1; simCount <= numSimTimeSteps; simCount++){
+    	//for(int simCount = 1; simCount <= numSimTimeSteps; simCount++){
 
 		for(int i = 0; i < numNodes; i++) {
 			
@@ -134,14 +134,21 @@ public class CreateNodeLinkStatsJson {
 			    }
 			    edgeCount = edgeCount + 1;
 	    	}
-		}
+		//}
 	    
+	    /* for simTimeStep
 	    timeObj.put("nodes", nodeElemList);
 	    timeObj.put("edges", edgeElemList);
 		
 		outerObj.put("time"+simCount, timeObj);
+		*/
+	    
+	    outerObj.put("nodes", nodeElemList);
+	    outerObj.put("edges", edgeElemList);
+		
 		
     	}
+    	return outerObj;
     }
     
     public void writeJsonDataFile(){

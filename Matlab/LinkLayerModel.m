@@ -46,16 +46,16 @@
 
 %function [topology, prrM] = LinkLayerModel(varargin)
 
-function [topology, linkPRR,linkRSSI, linkPE] = LinkLayerModel(PATH_LOSS_EXPONENT,SHADOWING_STANDARD_DEVIATION,MODULATION,ENCODING,PREAMBLE_LENGTH,FRAME_LENGTH,NUMBER_OF_NODES,TERRAIN_DIMENSIONS_X,TERRAIN_DIMENSIONS_Y,TOPOLOGY,GRID_UNIT,TEMPORAL_CORRELATION_COEFFICIENT,SPATIAL_CORRELATION_COEFFICIENT)
+function [topology, linkPRR,linkRSSI, linkPE] = LinkLayerModel(SIM_TIME_STEPS,TOPOLOGY_XY,PATH_LOSS_EXPONENT,SHADOWING_STANDARD_DEVIATION,MODULATION,ENCODING,PREAMBLE_LENGTH,FRAME_LENGTH,NUMBER_OF_NODES,TERRAIN_DIMENSIONS_X,TERRAIN_DIMENSIONS_Y,TOPOLOGY,GRID_UNIT,TEMPORAL_CORRELATION_COEFFICIENT,SPATIAL_CORRELATION_COEFFICIENT)
 
 %numInputs = length(varargin);
 %if (numInputs > 1)
 %	error('Error: only input argument can be topology');
 %end
 
-
+%cord_xy = TOPOLOGY_XY
 % Default Values
-simTimeSteps = 100;
+simTimeSteps = SIM_TIME_STEPS;
 PL_D0 = 55.0;
 D0 = 1.0;
 OUTPUT_POWER = -7.0;
@@ -203,7 +203,11 @@ elseif(TOPOLOGY==4)
 % where
 %       topology(i,1) denotes the x coordinates of node i
 %       topology(i,2) denotes the y coordinate of node i
-
+    for nodeIdx = 1:NUMBER_OF_NODES
+      topology(nodeIdx,:) = TOPOLOGY_XY{nodeIdx}(:,:); 
+    end
+    
+    %topology{1}(:,:)
     [p, q] = size(topology);
     if (p ~= NUMBER_OF_NODES)
         error('Number of nodes in file topology.m does not agree with NUMBER_OF_NODES');
